@@ -1,0 +1,18 @@
+﻿@model BOB_MVC.Models.BookModel
+
+@{
+    ViewBag.Title = "輸入書籍資料";
+    Layout = "~/Views/_template.cshtml";
+}
+
+<div style="margin-top:20%; text-size-adjust:auto; font-size:larger">
+    @using (Html.BeginForm("Insert", "BookSelect", FormMethod.Post, new Dictionary<string, Object> { { "data-ajax", "false" } }))
+    { <div>書籍名稱:<input id="bookname" name="bookname" type="text" /></div>
+        <div>書籍作者:<input id="author" name="author" type="text" /></div>
+        <div>價格:<input id="price" name="price" type="number" /></div>
+    <div>出版社:<input id="publisher" name="publisher" type="text" /></div>
+        <input type="submit" class="btn btn-info" value="save">
+    <span class="label label-warning"><a href="~/BOB/Book">回上一頁 </a> </span>
+  
+    }
+</div>

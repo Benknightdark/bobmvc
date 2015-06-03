@@ -1,0 +1,69 @@
+﻿@{
+    ViewBag.Title = "Delete_page";
+    Layout = "~/Views/_template.cshtml";
+}
+@using System.Data
+@model BOB_MVC.Models.BookModel
+@{
+    int id =Int16.Parse( HttpUtility.UrlDecode(Request.Url.AbsolutePath.Split('/').Last().ToString()));
+}
+<div class="table-responsive" style="margin-top:15%">
+@{foreach (DataRow x in Model.GetBookCascade().Rows)
+{
+    <table class="table">
+        <thead>
+            <tr class="danger">
+                <th>#</th>
+                <th>書名</th>
+                <th>作者</th>
+                <th>價格</th>
+                <th>出版社</th>
+
+            </tr>
+        </thead>
+        <tbody>
+            @{
+    foreach (DataRow row in Model.GetBookId(id).Rows)
+    {
+        <tr>
+            <td class="active">@row["id"].ToString()</td>
+            <td class="success">@row["bookname"].ToString()</td>
+            <td class="warning">@row["author"].ToString()</td>
+            <td class="warning">@row["price"].ToString()</td>
+            <td class="info">@row["publisher"].ToString()</td>
+        </tr>
+    }
+            }
+        </tbody>
+    </table>
+    if (Model.GetOrdersId(id).Rows.Count > 0)
+    {
+        <h2>注意！與此關聯表有關的外來鍵刪除規則為CASCADE，所以刪除以上資料時，將會導致以下關聯表Orders的資料一併被刪除！</h2>
+        <table class="table">
+            <thead>
+                <tr class="danger">
+                    <th>書局代號</th>
+                    <th>書名代號</th>
+                    <th>數量</th>
+                </tr>
+            </thead>
+            <tbody>
+                @{
+        foreach (DataRow row in Model.GetOrdersId(id).Rows)
+        {
+            <tr>
+                <td class="active">@row["no"].ToString()</td>
+                <td class="success">@row["id"].ToString()</td>
+                <td class="warning">@row["quantity"].ToString()</td>
+            </tr>
+        }
+                }
+            </tbody>
+        </table>
+    }
+}}
+    
+</div>
+<span class="label label-warning" style="font-size:x-large"><a href="/BookSelect/Delete/@id.ToString()">刪除 </a> </span>
+<span class="label label-warning" style="font-size:x-large"><a href="/BookSelect/BookSelectALL">放棄 </a> </span>
+

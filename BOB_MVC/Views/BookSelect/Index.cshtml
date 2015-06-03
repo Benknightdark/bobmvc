@@ -1,0 +1,102 @@
+﻿
+@{
+    ViewBag.Title = "查詢書本資料";
+    Layout = "~/Views/_template.cshtml";
+   
+}
+
+
+@using System.Data
+@model BOB_MVC.Models.BookModel
+
+
+
+
+
+<div class="container">
+    <ul class="list-group" style="margin-top:20%; text-size-adjust:auto; font-size:larger">
+        <li class="list-group-item list-group-item-success text-center"><a href="/BookSelect/BookSelectAll">查詢全部資料</a></li>
+    </ul>
+</div>
+<div class="row">
+    <div class="col-md-2">
+        <div class="dropdown">
+            <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-expanded="true">
+                查詢書本名稱
+                <span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
+                @{
+                    foreach (DataRow row in Model.GetBookByBookName_option().Rows)
+                    {
+                        <li role="presentation"><a role="menuitem" tabindex="-1" href="~/BookSelect/BookSelectByBookName/@row["bookname"].ToString()">@row["bookname"].ToString()</a></li>
+                    }
+
+                }
+            </ul>
+        </div>
+    </div>
+    <div class="col-md-2">
+        <div class="dropdown">
+            <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-expanded="true">
+                查詢作者
+                <span class="caret"></span>
+            </button>
+           
+
+            <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
+               
+                @{
+                    
+                    foreach (DataRow row in Model.GetBookByAuthor_option().Rows)
+                    {
+                        <li role="presentation"><a role="menuitem" tabindex="-1" href="~/BookSelect/BookSelectByAuthor/@row["author"].ToString()">@row["author"].ToString()</a></li>
+                    }
+
+                }
+            </ul>
+        </div>
+    </div>
+    <div class="col-md-2">
+        
+        
+        <div class="dropdown">
+            <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-expanded="true">
+                查詢價格
+                <span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
+                @{
+                    foreach (DataRow row in Model.GetBookByPrice_option().Rows)
+                    {
+                        <li role="presentation"><a role="menuitem" tabindex="-1" href="~/BookSelect/BookSelectByPrice/@row["price"].ToString()">@row["price"].ToString()</a></li>
+                    }
+
+                }
+            </ul>
+        </div>
+    </div>
+    <div class="col-md-2">
+        <div class="dropdown">
+            <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-expanded="true">
+                查詢查版社
+                <span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
+                @{
+                    foreach (DataRow row in Model.GetBookByPublisher_option().Rows)
+                    {
+                        <li role="presentation"><a role="menuitem" tabindex="-1" href="~/BookSelect/BookSelectByPublisher/@row["publisher"].ToString()">@row["publisher"].ToString()</a></li>
+                    }
+
+                }
+            </ul>
+        </div>
+    </div>
+
+</div>
+
+
+
+
+<span class="label label-warning"><a href="/BOB/BookStore">回上一頁 </a> </span>

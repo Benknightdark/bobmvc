@@ -1,0 +1,60 @@
+﻿@System.Web.Optimization.Styles.Render("~/Content/bootstrapcss")
+@System.Web.Optimization.Scripts.Render("~/bundles/jquery")
+@System.Web.Optimization.Scripts.Render("~/bundles/bootstrap")
+@model BOB_MVC.Models.BookModel.BookEditModel
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Views/_template.cshtml";
+}
+
+<div style="margin:20%;font-size:18px">
+    @using (Html.BeginForm())
+    {
+
+        @Html.ValidationSummary(true)
+        <div class="input-group">
+            <span class="input-group-addon" id="basic-addon1">
+                @Html.LabelFor(model => model.id)
+            @Html.HiddenFor(model => model.id)
+        </span>
+        <input type="text" class="form-control" placeholder=@Model.id aria-describedby="basic-addon1">
+    </div>
+        <div class="input-group">
+            <span class="input-group-addon" id="basic-addon1">
+                @Html.LabelFor(model => model.bookname)
+            </span>
+
+            @Html.EditorFor(model => model.bookname)
+
+            @Html.ValidationMessageFor(model => model.bookname)
+        </div>
+
+        <div class="input-group">
+            <span class="input-group-addon" id="basic-addon1">
+                @Html.LabelFor(model => model.author)
+            </span>
+            @Html.EditorFor(model => model.author)
+
+        </div>
+
+        <div class="input-group">
+            <span class="input-group-addon" id="basic-addon1">
+                @Html.LabelFor(model => model.price)
+            </span>
+            @Html.EditorFor(model => model.price)
+
+        </div>
+    <div class="input-group">
+        <span class="input-group-addon" id="basic-addon1">
+            @Html.LabelFor(model => model.publisher)
+        </span>
+        @Html.EditorFor(model => model.publisher)
+
+    </div>
+
+        <input type="submit" class="btn btn-info" value="save">
+    }
+
+    <span class="label label-warning"><a href="/BookSelect/BookSelectALL">回上一頁 </a> </span>
+
+</div>

@@ -1,0 +1,71 @@
+﻿@{
+    ViewBag.Title = "首頁";
+    Layout = "~/Views/_template.cshtml";
+}
+<style type="text/css">
+
+    .rslides {
+  position: relative;
+  list-style: none;
+  overflow: hidden;
+  width: 100%;
+  padding: 0;
+  margin: 0;
+  }
+
+.rslides li {
+  -webkit-backface-visibility: hidden;
+  position: absolute;
+  display: none;
+  width: 100%;
+  left: 0;
+  top: 0;
+  }
+
+.rslides li:first-child {
+  position: relative;
+  display: block;
+  float: left;
+  }
+
+.rslides img {
+  display: block;
+  height: auto;
+  float: left;
+  width: 100%;
+  border: 0;
+  }
+
+</style>
+<script>
+    $(function () {
+        
+        $(".rslides").responsiveSlides({
+            auto: true,             // Boolean: Animate automatically, true or false
+            speed: 500,            // Integer: Speed of the transition, in milliseconds
+            timeout: 4000,          // Integer: Time between slide transitions, in milliseconds
+            pager: false,           // Boolean: Show pager, true or false
+            nav: false,             // Boolean: Show navigation, true or false
+            random: false,          // Boolean: Randomize the order of the slides, true or false
+            pause: false,           // Boolean: Pause on hover, true or false
+            pauseControls: true,    // Boolean: Pause when hovering controls, true or false
+            prevText: "Previous",   // String: Text for the "previous" button
+            nextText: "Next",       // String: Text for the "next" button
+            maxwidth: "",           // Integer: Max-width of the slideshow, in pixels
+            navContainer: "",       // Selector: Where controls should be appended to, default is after the 'ul'
+            manualControls: "",     // Selector: Declare custom pager navigation
+            namespace: "rslides",   // String: Change the default namespace used
+            before: function () { },   // Function: Before callback
+            after: function () { }     // Function: After callback
+        });
+    });
+</script>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+<script src="~/Scripts/responsiveslides.js"></script>
+<h2></h2>
+
+<ul class="rslides">
+    <li><img src="/photo/1.jpg" alt=""></li>
+    <li><img src="/photo/2.jpg" alt=""></li>
+    <li><img src="/photo/3.jpg" alt=""></li>
+</ul>

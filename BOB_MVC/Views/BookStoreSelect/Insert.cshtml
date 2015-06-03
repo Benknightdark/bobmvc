@@ -1,0 +1,16 @@
+﻿@model BOB_MVC.Models.BookStoreModel
+
+@{
+    ViewBag.Title = "輸入書店資料";
+    Layout = "~/Views/_template.cshtml";
+}
+<div style="margin-top:20%; text-size-adjust:auto; font-size:larger">
+    @using (Html.BeginForm("Insert", "BookStoreSelect", FormMethod.Post, new Dictionary<string, Object> { { "data-ajax", "false" } }))
+    { <div>書店名稱:<input id="name" name="name" type="text" /></div>
+        <div>書店排名:<input id="rank" name="rank" type="text" /></div>
+        <div>書店位址:<input id="city" name="city" type="text" /></div>
+        <input type="submit" class="btn btn-info" value="save">
+    }
+    <span class="label label-warning"><a href="~/BOB/BookStore">回上一頁 </a> </span>
+</div>
+    

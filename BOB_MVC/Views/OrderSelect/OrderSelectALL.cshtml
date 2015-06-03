@@ -1,0 +1,39 @@
+﻿@{
+    ViewBag.Title = "OrderSelectALL";
+    Layout = "~/Views/_template.cshtml";
+}
+
+@model System.Data.DataTable
+@using System.Data
+
+<div class="table-responsive" style="margin-top:15%">
+    <table class="table">
+        <thead>
+            <tr class="danger">
+                <th>書名</th>
+                <th>書局名稱</th>
+                <th>數量</th>                
+            </tr>
+        </thead>
+        <tbody>
+            @{
+                foreach (DataRow row in Model.Rows)
+                {
+                    <tr>
+                        <td class="active">@row["bookname"].ToString()</td>
+                        <td class="success">@row["name"].ToString()</td>
+                        <td class="warning">@row["quantity"].ToString()</td>                                                
+                    </tr>
+                }
+            }
+        </tbody>
+    </table>
+    <span class="label label-warning"><a href="/OrderSelect/Index">回上一頁 </a> </span>
+</div>
+
+<script>
+    function check() {
+        return confirm("Delete?");
+
+    }
+</script>

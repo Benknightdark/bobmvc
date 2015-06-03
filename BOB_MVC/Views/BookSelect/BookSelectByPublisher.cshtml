@@ -1,0 +1,44 @@
+﻿@{
+    ViewBag.Title = "BookSelectByPublisher";
+    Layout = "~/Views/_template.cshtml";
+}
+
+@model System.Data.DataTable
+@using System.Data
+
+<div class="table-responsive" style="margin-top:15%">
+    <table class="table">
+        <thead>
+            <tr class="danger">
+                <th>#</th>
+                <th>書名</th>
+                <th>作者</th>
+                <th>價格</th>
+                <th>出版社</th>
+
+            </tr>
+        </thead>
+        <tbody>
+            @{
+                foreach (DataRow row in Model.Rows)
+                {
+                    <tr>
+                        <td class="active">@row["id"].ToString()</td>
+                        <td class="success">@row["bookname"].ToString()</td>
+                        <td class="warning">@row["author"].ToString()</td>
+                        <td class="warning">@row["price"].ToString()</td>
+                        <td class="info">@row["publisher"].ToString()</td>
+                    </tr>
+                }
+            }
+        </tbody>
+    </table>
+    <span class="label label-warning"><a href="~/BookSelect/">回上一頁 </a> </span>
+</div>
+
+<script>
+    function check() {
+        return confirm("Delete?");
+
+    }
+</script>

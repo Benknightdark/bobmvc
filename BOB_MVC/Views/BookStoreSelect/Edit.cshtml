@@ -1,0 +1,63 @@
+﻿@model BOB_MVC.Models.EditModel
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Views/_template.cshtml";
+}
+@System.Web.Optimization.Styles.Render("~/Content/bootstrapcss")
+@System.Web.Optimization.Scripts.Render("~/bundles/jquery")
+@System.Web.Optimization.Scripts.Render("~/bundles/bootstrap")
+<style>
+    <!-- apply to all labels -->
+    label {
+        position: absolute;
+        text-align: right;
+        width: 130px;
+    }
+    <!-- apply to all labels with class check-- > label.check {
+        font-weight: bold;
+        padding-left: 10px;
+    }
+    <!-- apply to all input and textarea tags-- > input, textarea {
+        margin-left: 140px;
+    }
+    <!-- apply to all input with class special-- > input.special {
+        font-weight: bold;
+    }
+</style>
+<div style="margin:20%;font-size:18px">
+    @using (Html.BeginForm())
+    {       
+        @Html.ValidationSummary(true)
+    <div class="input-group">
+        <span class="input-group-addon" id="basic-addon1">@Html.LabelFor(model => model.no)
+                                                          @Html.HiddenFor(model => model.no)</span>
+        <input type="text" class="form-control" placeholder=@Model.no aria-describedby="basic-addon1">
+    </div>
+    <div class="input-group">
+        <span class="input-group-addon" id="basic-addon1">
+            @Html.LabelFor(model => model.name)
+    </span>      
+            @Html.EditorFor(model => model.name)
+            
+            @Html.ValidationMessageFor(model => model.name)
+        </div>       
+    <div class="input-group">
+        <span class="input-group-addon" id="basic-addon1">
+            @Html.LabelFor(model => model.city)
+        </span>
+        @Html.EditorFor(model => model.city)        
+    </div>
+    <div class="input-group">
+        <span class="input-group-addon" id="basic-addon1">
+           @Html.LabelFor(model => model.rank)
+        </span>
+       @Html.EditorFor(model => model.rank)        
+    </div>
+    <input type="submit" class="btn btn-info" value="save">
+    }  
+    <span class="label label-warning"><a href="/BookStoreSelect/BookStoreSelectALL">回上一頁 </a> </span>
+</div>
+
+
+
+

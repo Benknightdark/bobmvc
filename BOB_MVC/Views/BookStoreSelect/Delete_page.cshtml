@@ -1,0 +1,72 @@
+﻿@{
+    ViewBag.Title = "刪除頁面";
+    Layout = "~/Views/_template.cshtml";
+}
+
+@using System.Data
+@model BOB_MVC.Models.BookStoreModel /*使用bookstoremodel裡的function()*/
+@{
+    //擷取網址列上書局id編號
+    int no = Int16.Parse(HttpUtility.UrlDecode(Request.Url.AbsolutePath.Split('/').Last().ToString()));
+    
+}
+<div class="table-responsive" style="margin-top:15%">
+    @{foreach (DataRow x in Model.GetBookStoreCascade().Rows)
+    {
+        if (Int16.Parse(@x["DELETE_RULE"].ToString())==0) /*判斷外來鍵刪除規則是否為cascade*/            
+        {
+            <table class="table">
+                <thead>
+                    <tr class="danger">
+                        <th>#</th>
+                        <th>名稱</th>
+                        <th>居住地</th>
+                        <th>排名</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @{
+            foreach (DataRow row in Model.GetBookStoreByNo(no).Rows)/*回傳與書局id相符的boookstore資料*/
+            {
+                <tr>
+                    <td class="active">@row["no"].ToString()</td>
+                    <td class="success">@row["name"].ToString()</td>
+                    <td class="warning">@row["city"].ToString()</td>
+                    <td class="info">@row["rank"].ToString()</td>
+                </tr>
+            }
+                    }
+                </tbody>
+            </table>
+            if (Model.GetOrdersNo(no).Rows.Count > 0)/*判斷orders表格是否有資料*/
+            {
+                <h2>注意！與此關聯表有關的外來鍵刪除規則為CASCADE，所以刪除以上資料時，
+                  將會導致以下關聯表Orders的資料一併被刪除！</h2>
+                <table class="table">
+                    <thead>
+                        <tr class="danger">
+                            <th>書局代號</th>
+                            <th>書名代號</th>
+                            <th>數量</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @{
+                foreach (DataRow row in Model.GetOrdersNo(no).Rows)/*回傳與書局id相符的orders資料*/
+                {
+                    <tr>
+                        <td class="active">@row["no"].ToString()</td>
+                        <td class="success">@row["id"].ToString()</td>
+                        <td class="warning">@row["quantity"].ToString()</td>
+                    </tr>
+                }
+                        }
+                    </tbody>
+                </table>
+            }
+        }
+    }
+}
+    <span class="label label-warning" style="font-size:x-large"><a href="/BookStoreSelect/Delete/@no.ToString()">刪除 </a> </span>
+    <span class="label label-warning" style="font-size:x-large"><a href="/BookStoreSelect/BookStoreSelectALL">取消 </a> </span>
+</div>
